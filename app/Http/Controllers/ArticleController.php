@@ -1,6 +1,4 @@
 <?php
-
-// app/Http/Controllers/Api/ArticleController.php
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -20,7 +18,7 @@ class ArticleController extends Controller
                 $q->where('reference', 'like', "%$search%")
                   ->orWhere('designation', 'like', "%$search%")
                   ->orWhere('cout', 'like', "%$search%")
-                  ->orWhere('unite', 'like', "%$search%")
+                  ->orWhere('unite', 'like', "%$search%");
                   
             });
         }
@@ -39,7 +37,7 @@ class ArticleController extends Controller
             'reference' => 'sometimes|string|max:255',
             'designation' => 'sometimes|string|max:255',
             'unite' => 'sometimes|string|max:20',
-            'cout' => 'sometimes|string|max:20',
+            'cout' => 'sometimes|string|max:40',
            
         ]);
 
@@ -54,13 +52,13 @@ class ArticleController extends Controller
         return response()->json($article);
     }
 
-    public function update(Request $request, Article $Article)
+    public function update(Request $request, Article $article)
     {
         $validated = $request->validate([
             'reference' => 'sometimes|string|max:255',
             'designation' => 'sometimes|string|max:255',
             'unite' => 'sometimes|string|max:20',
-            'cout' => 'sometimes|string|max:20',
+            'cout' => 'sometimes|string|max:40',
            
         ]);
 

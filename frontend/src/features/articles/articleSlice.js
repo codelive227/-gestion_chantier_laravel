@@ -1,12 +1,12 @@
-// src/features/matierePremiereSlice.js
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as ouvrierService from '../../services/ouvrierService';
 
-export const fetchOuvriers = createAsyncThunk(
-  'ouvrier/fetchAll',
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import * as articleService from '../../services/articleService';
+
+export const fetchArticles = createAsyncThunk(
+  'article/fetchAll',
   async (params, { rejectWithValue }) => {
     try {
-      const response = await ouvrierService.getOuvriers(params);
+      const response = await articleService.getArticles(params);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -14,11 +14,11 @@ export const fetchOuvriers = createAsyncThunk(
   }
 );
 
-export const addOuvrier = createAsyncThunk(
-  'ouvrier/add',
+export const addArticle = createAsyncThunk(
+  'article/add',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await ouvrierService.createOuvrier(data);
+      const response = await articleService.createArticle(data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -26,11 +26,11 @@ export const addOuvrier = createAsyncThunk(
   }
 );
 
-export const updateOuvrier = createAsyncThunk(
-  'ouvrier/update',
+export const updateArticle = createAsyncThunk(
+  'article/update',
   async ({ id, data }, { rejectWithValue }) => {
     try {
-      const response = await ouvrierService.updateOuvrier(id, data);
+      const response = await articleService.updateArticle(id, data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -38,11 +38,11 @@ export const updateOuvrier = createAsyncThunk(
   }
 );
 
-export const removeOuvrier = createAsyncThunk(
-  'ouvrier/delete',
+export const removeArticle = createAsyncThunk(
+  'article/delete',
   async (id, { rejectWithValue }) => {
     try {
-      await ouvrierService.deleteOuvrier(id);
+      await articleService.deleteArticle(id);
       return id;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -61,16 +61,16 @@ const initialState = {
   },
 };
 
-const ouvrierSlice = createSlice({
-  name: 'ouvrier',
+const articleSlice = createSlice({
+  name: 'article',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOuvriers.pending, (state) => {
+      .addCase(fetchArticles.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchOuvriers.fulfilled, (state, action) => {
+      .addCase(fetchArticles.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.items = action.payload.data;
         state.pagination = {
@@ -79,21 +79,21 @@ const ouvrierSlice = createSlice({
           totalItems: action.payload.total,
         };
       })
-      .addCase(fetchOuvriers.rejected, (state, action) => {
+      .addCase(fetchArticles.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       })
-      // Removed duplicate addCase for 'fetchOuvriers.fulfilled'
-      .addCase(updateOuvrier.fulfilled, (state, action) => {
+      // Removed duplicate addCase for 'fetchArticles.fulfilled'
+      .addCase(updateArticle.fulfilled, (state, action) => {
         const index = state.items.findIndex(item => item.id === action.payload.id);
         if (index !== -1) {
           state.items[index] = action.payload;
         }
       })
-      .addCase(removeOuvrier.fulfilled, (state, action) => {
+      .addCase(removeArticle.fulfilled, (state, action) => {
         state.items = state.items.filter(item => item.id !== action.payload);
       });
   },
 });
 
-export default ouvrierSlice.reducer;
+export default articleSlice.reducer;

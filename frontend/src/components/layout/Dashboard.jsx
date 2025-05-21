@@ -13,7 +13,7 @@ const menuItems = [
   { name: 'Matière premières', icon: <FaTools />, path: '/dashboard/matiere-premiere' },
   { name: 'Ouvriers', icon: <FaHardHat />, path: '/dashboard/ouvrier' },
   { name: 'Articles', icon: <FaBox />, path: '/dashboard/articles' },
-  { name: 'Mode de règlements', icon: <FaMoneyCheckAlt />, path: '/dashboard/mode-reglement' },
+  { name: 'Paiements', icon: <FaMoneyCheckAlt />, path: '/dashboard/paiement' },
   { name: 'Chantiers', icon: <FaProjectDiagram />, path: '/dashboard/chantier' },
   { name: 'Clients', icon: <FaUsers />, path: '/dashboard/clients' },
   { name: 'Utilisateurs', icon: <FaUserCircle />, path: '/dashboard/utilisateur' },

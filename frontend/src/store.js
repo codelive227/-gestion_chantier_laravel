@@ -5,6 +5,8 @@ import fournisseurReducer from './features/fournisseurs/fournisseurSlice';
 import matierePremiereReducer from './features/matierepremiere/matierePremiereSlice';
 import ouvrierReducer from './features/ouvriers/ouvrierSlice';
 import chantierReducer from './features/chantiers/chantierSlice';
+import articleReducer from './features/articles/articleSlice';
+import paiementReducer from './features/paiements/paiementSlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +15,7 @@ export const store = configureStore({
     matierePremiere: matierePremiereReducer,
     ouvriers: ouvrierReducer,
     chantier: chantierReducer,
-  },
+    article: articleReducer,
+    paiement: paiementReducer,
+  }, 
 });
