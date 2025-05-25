@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchChantiers, removeChantier } from "../../features/chantiers/chantierSlice";
 import Swal from "sweetalert2";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2, Plus, Eye } from "lucide-react";
 
 const Chantier = () => {
   const dispatch = useDispatch();
@@ -106,6 +106,7 @@ const Chantier = () => {
                     {new Date(chantier.date_estime).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-2 flex justify-center space-x-3">
+                    
                     <Link
                       to={`/dashboard/modifier-chantier/${chantier.id}`}
                       title="Modifier"
@@ -113,6 +114,13 @@ const Chantier = () => {
                     >
                       <Pencil size={18} />
                     </Link>
+                    <Link
+  to={`/dashboard/voir-chantier/${chantier.id}`}
+  className="text-green-600 hover:text-green-800 transition"
+>
+  <Eye size={18} />
+                    </Link>
+
                     <button
                       title="Supprimer"
                       onClick={() => handleDelete(chantier.id)}

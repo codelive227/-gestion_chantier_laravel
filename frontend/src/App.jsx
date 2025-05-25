@@ -31,6 +31,7 @@ import EditOuvrier from './Pages/Dashboard/EditOuvrier';
 import Chantier from './Pages/dashboard/Chantier';
 import AddChantier from './Pages/Dashboard/AddChantier';
 import EditChantier from './Pages/Dashboard/EditChantier';
+import DetailChantier from './Pages/Dashboard/DetailChantier';
 
 import Article from './Pages/Dashboard/Article';
 import AddArticle from './Pages/Dashboard/AddArticle';
@@ -81,6 +82,8 @@ const App = () => {
                 <Route path="/dashboard/chantier" element={<Chantier />} />
                 <Route path="/dashboard/ajouter-chantier" element={<AddChantier />} />
                 <Route path="/dashboard/modifier-chantier/:id" element={<EditChantier />} />
+                <Route path="/dashboard/voir-chantier/:id" element={<DetailChantier />} />
+
 
                 <Route path="/dashboard/article" element={<Article/>} />
                 <Route path="/dashboard/ajouter-article" element={<AddArticle />} />

@@ -11,5 +11,12 @@ class Ouvrier extends Model
 
   // App\Models\Ouvrier.php
 protected $fillable = ['nom', 'prenom', 'statut', 'salaire_journalier']; 
+
+public function articleChantiers()
+{
+    return $this->belongsToMany(ArticleChantier::class, 'article_chantier_ouvriers')
+                ->withPivot(['date_debut', 'date_fin']);
+}
+
  
 }

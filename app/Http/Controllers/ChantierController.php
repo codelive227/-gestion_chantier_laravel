@@ -6,6 +6,7 @@ use App\Models\Chantier;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ChantierController extends Controller
 {
@@ -50,20 +51,14 @@ public function clients()
    // ChantierController.php
 public function show($id)
 {
-    $chantier = Chantier::with('client')->find($id);
-    
-    if (!$chantier) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Chantier non trouvé'
-        ], 404);
-    }
+    $chantier = Chantier::with([
+        'articles.ouvriers'
+    ])->findOrFail($id);
 
-    return response()->json([
-        'success' => true,
-        'data' => $chantier
-    ]);
+    return response()->json($chantier);
 }
+
+
 
     // Update chantier
     public function update(Request $request, $id)
@@ -97,4 +92,12 @@ public function show($id)
         
         return response()->json(null, 204);
     }
+    public function exportPdf($id)
+{
+    $chantier = Chantier::with(['client', 'projet'])->findOrFail($id);
+    $pdf = Pdf::loadView('pdf.chantier', compact('chantier'));
+
+    return $pdf->download("chantier_{$id}.pdf");
+}
+
 }

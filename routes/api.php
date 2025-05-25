@@ -12,8 +12,9 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PaiementController;
 
 // Route pour récupérer l'utilisateur authentifié
+// routes/api.php
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return $request->user(); // Doit retourner les infos utilisateur
 });
 
 // Authentification
